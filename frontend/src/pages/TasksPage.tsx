@@ -27,8 +27,8 @@ function TasksPage() {
   const [projects, setProjects] = useState<Project[]>([])
   const [users, setUsers] = useState<User[]>([])
   const [title, setTitle] = useState('')
-  const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null)
-  const [selectedUserId, setSelectedUserId] = useState<number | null>(null)
+  const [selectedProjectId, setSelectedProjectId] = useState<number | ''>('')
+  const [selectedUserId, setSelectedUserId] = useState<number | ''>('')
   const [dueDate, setDueDate] = useState('')
   const [statusMessage, setStatusMessage] = useState('')
 
@@ -74,15 +74,15 @@ function TasksPage() {
     setStatusMessage('')
     setIsCreatingTask(true)
     try {
-      const taskData: any = { title }
-      if (selectedProjectId) taskData.projectId = selectedProjectId
-      if (selectedUserId) taskData.assignedUserId = selectedUserId
-      if (dueDate) taskData.dueDate = dueDate
-
-      await api.post('/tasks', taskData)
+      await api.post('/tasks', {
+        title,
+        projectId: selectedProjectId,
+        assignedUserId: selectedUserId,
+        dueDate: dueDate || null,
+      })
       setTitle('')
-      setSelectedProjectId(null)
-      setSelectedUserId(null)
+      setSelectedProjectId('')
+      setSelectedUserId('')
       setDueDate('')
       setStatusMessage('Task created successfully.')
       loadTasks()
@@ -132,12 +132,13 @@ function TasksPage() {
             />
           </label>
           <label>
-            Project (optional)
+            Project
             <select
-              value={selectedProjectId || ''}
-              onChange={(event) => setSelectedProjectId(Number(event.target.value) || null)}
+              value={selectedProjectId}
+              onChange={(event) => setSelectedProjectId(Number(event.target.value) || '')}
+              required
             >
-              <option value="">No project</option>
+              <option value="">Choose project</option>
               {projects.map((project) => (
                 <option key={project.id} value={project.id}>
                   {project.name}
@@ -146,12 +147,13 @@ function TasksPage() {
             </select>
           </label>
           <label>
-            Assigned user (optional)
+            Assigned user
             <select
-              value={selectedUserId || ''}
-              onChange={(event) => setSelectedUserId(Number(event.target.value) || null)}
+              value={selectedUserId}
+              onChange={(event) => setSelectedUserId(Number(event.target.value) || '')}
+              required
             >
-              <option value="">No assignment</option>
+              <option value="">Choose user</option>
               {users.map((user) => (
                 <option key={user.id} value={user.id}>
                   {user.name} ({user.email})
@@ -160,7 +162,7 @@ function TasksPage() {
             </select>
           </label>
           <label>
-            Due date (optional)
+            Due date
             <input
               type="date"
               value={dueDate}
@@ -188,9 +190,9 @@ function TasksPage() {
                   onChange={(event) => handleStatusChange(task.id, event.target.value)}
                   disabled={isUpdatingStatus}
                 >
-                  <option value="todo">Todo</option>
-                  <option value="in-progress">In progress</option>
-                  <option value="done">Done</option>
+                  <option value="TODO">Todo</option>
+                  <option value="IN_PROGRESS">In progress</option>
+                  <option value="DONE">Done</option>
                 </select>
               </li>
             ))}

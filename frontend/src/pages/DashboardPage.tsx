@@ -3,16 +3,16 @@ import api from '../api/axios'
 
 type DashboardStats = {
   totalTasks: number
-  completedTasks: number
-  pendingTasks: number
-  overdueTasks: number
+  completed: number
+  pending: number
+  overdue: number
 }
 
 const initialStats: DashboardStats = {
   totalTasks: 0,
-  completedTasks: 0,
-  pendingTasks: 0,
-  overdueTasks: 0,
+  completed: 0,
+  pending: 0,
+  overdue: 0,
 }
 
 function DashboardPage() {
@@ -44,15 +44,15 @@ function DashboardPage() {
           <p>Total tasks</p>
         </div>
         <div className="stat-card">
-          <h2>{isLoading ? '...' : stats.completedTasks}</h2>
+          <h2>{isLoading ? '...' : stats.completed}</h2>
           <p>Completed</p>
         </div>
         <div className="stat-card">
-          <h2>{isLoading ? '...' : stats.pendingTasks}</h2>
+          <h2>{isLoading ? '...' : stats.pending}</h2>
           <p>Pending</p>
         </div>
         <div className="stat-card">
-          <h2>{isLoading ? '...' : stats.overdueTasks}</h2>
+          <h2>{isLoading ? '...' : stats.overdue}</h2>
           <p>Overdue</p>
         </div>
       </div>

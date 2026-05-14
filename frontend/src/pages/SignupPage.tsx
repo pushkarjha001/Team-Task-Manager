@@ -32,7 +32,8 @@ function SignupPage() {
       setSuccess('Signup successful. Redirecting to login...')
       setTimeout(() => navigate('/login'), 1200)
     } catch (err: any) {
-      if (err.response?.status === 409) {
+      const message = err.response?.data?.error ?? ''
+      if (err.response?.status === 409 || message.toLowerCase().includes('email')) {
         setError('Email already exists. Please use a different email.')
       } else if (err.response?.status === 400) {
         setError('Invalid information. Please check all fields.')

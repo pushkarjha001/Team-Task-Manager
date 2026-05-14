@@ -26,7 +26,7 @@ function LoginPage() {
       login(response.data.token, response.data)
       navigate('/dashboard')
     } catch (err: any) {
-      if (err.response?.status === 401) {
+      if (err.response?.status === 400 || err.response?.status === 401) {
         setError('Invalid email or password.')
       } else if (err.response?.status === 403) {
         setError('Account is disabled. Contact administrator.')
