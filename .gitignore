@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Frontend build output
+frontend/dist/
+
+# Java build output
+Backend/team-task-manager-backend/target/
+Backend/starter.zip
+Backend/data/
+Backend/public/
+
+# Environment files
+.env
+.env.*
+frontend/.env
+frontend/.env.*
+Backend/team-task-manager-backend/.env
+Backend/team-task-manager-backend/.env.*
+!.env.example
+!frontend/.env.example
+!Backend/team-task-manager-backend/.env.example
+
+# IDE and OS files
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,11 @@
+{
+  "name": "team-task-manager",
+  "private": true,
+  "scripts": {
+    "backend:dev": "cd Backend/team-task-manager-backend && mvnw.cmd spring-boot:run",
+    "backend:test": "cd Backend/team-task-manager-backend && mvnw.cmd test",
+    "backend:build": "cd Backend/team-task-manager-backend && mvnw.cmd clean package -DskipTests",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build"
+  }
+}
