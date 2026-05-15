@@ -14,16 +14,18 @@ Full-stack Team Task Manager assignment with authentication, role-based access, 
 ```text
 team-task-manager/
 ├── frontend/
-└── Backend/
+└── backend/
     └── team-task-manager-backend/
 ```
+
+---
 
 ## Local Setup
 
 ### Backend
 
 ```powershell
-cd Backend\team-task-manager-backend
+cd backend\team-task-manager-backend
 .\mvnw.cmd spring-boot:run
 ```
 
@@ -33,6 +35,8 @@ Backend URL:
 http://localhost:8080
 ```
 
+---
+
 ### Frontend
 
 ```powershell
@@ -41,7 +45,7 @@ npm install
 npm run dev
 ```
 
-Frontend URL:
+Frontend Local URL:
 
 ```text
 http://localhost:5173
@@ -52,6 +56,8 @@ Frontend local env:
 ```env
 VITE_API_BASE_URL=http://localhost:8080/api
 ```
+
+---
 
 ## Features
 
@@ -66,9 +72,11 @@ VITE_API_BASE_URL=http://localhost:8080/api
 - Role-based frontend UI
 - Backend role and ownership enforcement
 
+---
+
 ## Backend API
 
-Auth:
+### Auth
 
 ```text
 POST /api/auth/signup
@@ -76,7 +84,7 @@ POST /api/auth/login
 GET  /api/auth/me
 ```
 
-Projects:
+### Projects
 
 ```text
 GET  /api/projects
@@ -86,7 +94,7 @@ GET  /api/projects/{id}/members
 POST /api/projects/{id}/members
 ```
 
-Tasks:
+### Tasks
 
 ```text
 GET /api/tasks
@@ -95,32 +103,28 @@ GET /api/tasks/{id}
 PUT /api/tasks/{id}/status
 ```
 
-Dashboard:
+### Dashboard
 
 ```text
 GET /api/dashboard
 ```
 
-Users:
+### Users
 
 ```text
 GET /api/users
 ```
 
+---
+
 ## Railway Deployment
 
-Deploy as two services from the same GitHub repository:
+Deploy backend service from the same GitHub repository.
 
-1. Backend service root directory:
-
-```text
-/Backend/team-task-manager-backend
-```
-
-2. Frontend service root directory:
+### Backend Service Root Directory
 
 ```text
-/frontend
+/backend/team-task-manager-backend
 ```
 
 ### Backend Railway Variables
@@ -134,47 +138,52 @@ DATABASE_USERNAME=${{Postgres.PGUSER}}
 DATABASE_PASSWORD=${{Postgres.PGPASSWORD}}
 JWT_SECRET=replace-with-a-long-random-secret-at-least-32-characters
 JWT_EXPIRATION_MS=86400000
-app.cors.allowed-origins=https://your-frontend-domain.up.railway.app
 ```
 
-Backend build command:
+### Backend Build Command
 
 ```bash
 ./mvnw clean package -DskipTests
 ```
 
-Backend start command:
+### Backend Start Command
 
 ```bash
 java -jar target/team-task-manager-backend-0.0.1-SNAPSHOT.jar
 ```
 
-### Frontend Railway Variables
+---
 
-Set this before building the frontend:
+## Frontend Vercel Deployment
+
+Set this environment variable before deployment:
 
 ```env
 VITE_API_BASE_URL=https://your-backend-domain.up.railway.app/api
 ```
 
-Frontend build command:
+Vercel automatically detects and deploys the Vite React application.
 
-```bash
-npm run build
+---
+
+## Live Demo
+
+### Frontend
+
+```text
+https://team-task-manager-bice-nu.vercel.app
 ```
 
-Frontend start command:
+### Backend
 
-```bash
-npm run preview -- --host 0.0.0.0 --port $PORT
+```text
+https://team-task-manager-production-44cd.up.railway.app
 ```
 
-Railway rebuilds Vite apps when environment variables change, so update `VITE_API_BASE_URL` before the production deploy.
+### GitHub Repository
 
-## Final Submission
+```text
+https://github.com/pushkarjha001/Team-Task-Manager
+```
 
-Submit:
-
-- Live frontend URL
-- GitHub repository URL
-- README with setup and deployment notes
+---
