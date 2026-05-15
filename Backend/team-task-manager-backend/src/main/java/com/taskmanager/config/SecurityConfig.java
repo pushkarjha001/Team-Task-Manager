@@ -34,7 +34,7 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserDetailsService userDetailsService;
 
-    @Value("${app.cors.allowed-origins:http://localhost:5173,http://localhost:5174,https://team-task-manager-bice-nu.vercel.app}")
+    @Value("${app.cors.allowed-origins:${APP_CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:5174,https://team-task-manager-bice-nu.vercel.app}}")
     private String allowedOrigins;
 
     @Bean
