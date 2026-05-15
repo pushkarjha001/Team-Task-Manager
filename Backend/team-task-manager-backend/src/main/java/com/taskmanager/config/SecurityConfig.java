@@ -35,7 +35,14 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/signup", "/api/auth/login", "/h2-console/**", "/actuator/health").permitAll()
+                    .requestMatchers(
+                            "/api/auth/signup",
+                            "/api/auth/login",
+                            "/h2-console/**",
+                            "/actuator/health",
+                            "/swagger-ui/**",
+                            "/v3/api-docs/**"
+                    ).permitAll()
                 .anyRequest().authenticated()
             )
             .authenticationProvider(authenticationProvider())
